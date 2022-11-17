@@ -1,9 +1,10 @@
-<?php $fullName = $musician['firstname'] . ' ' . $musician['lastname']; ?>
+<?php $fullName = $musician['first_name'] . ' ' . $musician['last_name']; ?>
 <article class="card">
     <img src="uploads/<?= $musician['image'] ?>" alt="<?= $fullName ?>">
     <h3>
         <?= $fullName ?>
     </h3>
+    <!--
     <ul class="badge-list">
         <?php foreach ($musician['instruments'] as $instrument) : ?>
             <li>
@@ -16,4 +17,5 @@
             </li>
         <?php endforeach; ?>
     </ul>
+    -->
 </article>

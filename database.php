@@ -3,6 +3,8 @@
  * Ensemble des fonctions liées à la BDD
  */
 
+$connection = new PDO('mysql:dbname=dev8_trad_music;host=127.0.0.1', 'root', 'root');
+
 function getAllGigs(): array
 {
     return [
@@ -31,30 +33,11 @@ function getAllGigs(): array
 
 function getAllMusicians(): array
 {
-    return [
-        [
-            'image' => 'sean-obroin.jpeg',
-            'firstname' => 'Sean',
-            'lastname' => 'O\'Broin',
-            'instruments' => [
-                [
-                    'name' => 'Flute'
-                ],
-                [
-                    'name' => 'Guitar',
-                    'picto' => 'guitar'
-                ]
-            ]
-        ],
-        [
-            'image' => 'gavin-pennycook.jpg',
-            'firstname' => 'Gavin',
-            'lastname' => 'Pennycook',
-            'instruments' => [
-                [
-                    'name' => 'Violon'
-                ]
-            ]
-        ]
-    ];
+    global $connection;
+
+    $query = "SELECT * FROM musician";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
 }
