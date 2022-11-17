@@ -41,3 +41,25 @@ function getAllMusicians(): array
 
     return $stmt->fetchAll();
 }
+
+function getAllInstruments(): array
+{
+    global $connection;
+
+    $query = "SELECT * FROM instrument";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
+// Créer une seule fonction avec des paramètres pour générer et retourner les résultats d'une requête SQL
+
+// getAll('musician');
+// ==> SELECT * FROM musician
+
+// getAll('musician', ['first_name' => 'Gavin', 'last_name' => 'Pennycook']);
+// ==> SELECT * FROM musician WHERE first_name = 'Sean' AND last_name = 'Pennycook'
+
+// getAll('musician', ['first_name' => 'Sean'], ['first_name' => 'ASC', 'last_name' => 'ASC']);
+// ==> SELECT * FROM musician WHERE first_name = 'Sean' ORDER BY first_name ASC, last_name ASC
