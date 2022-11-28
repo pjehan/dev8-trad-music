@@ -31,29 +31,18 @@ function getAllGigs(): array
     ];
 }
 
-function getAllMusicians(): array
-{
-    global $connection;
-
-    $query = "SELECT * FROM musician";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-
-    return $stmt->fetchAll();
-}
-
-function getAllInstruments(): array
-{
-    global $connection;
-
-    $query = "SELECT * FROM instrument";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-
-    return $stmt->fetchAll();
-}
-
 // Créer une seule fonction avec des paramètres pour générer et retourner les résultats d'une requête SQL
+function findAll(string $table): array
+{
+    global $connection;
+
+    $query = "SELECT * FROM $table";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
 
 // getAll('musician');
 // ==> SELECT * FROM musician
