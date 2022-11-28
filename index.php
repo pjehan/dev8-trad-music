@@ -3,7 +3,8 @@ require_once "functions.php";
 require_once "database.php";
 
 $gigs = getAllGigs();
-$musicians = findAll('musician');
+$musicians = findAll('musician', [], ['first_name' => 'ASC', 'last_name' => 'ASC']);
+// SELECT * FROM musician ORDER BY first_name ASC, last_name ASC;
 
 getHeader('Accueil', 'Description de la page accueil');
 // getHeader('Accueil', 'Description de la page accueil', ['css/accueil.css', 'css/form.css']);
