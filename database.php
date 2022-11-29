@@ -3,7 +3,10 @@
  * Ensemble des fonctions liées à la BDD
  */
 
-$connection = new PDO('mysql:dbname=dev8_trad_music;host=127.0.0.1', 'root', 'root');
+$connection = new PDO('mysql:dbname=dev8_trad_music;host=127.0.0.1', 'root', 'root', [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_EMULATE_PREPARES => false
+]);
 
 function getAllGigs(): array
 {
@@ -72,12 +75,18 @@ function findAll(string $table, array $conditions = [], array $order = []): arra
     return $stmt->fetchAll();
 }
 
+function findMusicianInstruments(int $musician_id): array
+{
+    global $connection;
 
-// getAll('musician');
-// ==> SELECT * FROM musician
+    $query = "
+            SELECT *
+            FROM instrument
+            INNER JOIN musician_has_instrument AS mhi ON mhi.instrument_id = instrument.id
+            WHERE mhi.musician_id = $musician_id
+    ";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
 
-// getAll('musician', ['first_name' => 'Gavin', 'last_name' => 'Pennycook']);
-// ==> SELECT * FROM musician WHERE first_name = 'Gavin' AND last_name = 'Pennycook'
-
-// getAll('musician', ['first_name' => 'Sean'], ['first_name' => 'ASC', 'last_name' => 'ASC']);
-// ==> SELECT * FROM musician WHERE first_name = 'Sean' ORDER BY first_name ASC, last_name ASC
+    return $stmt->fetchAll();
+}
