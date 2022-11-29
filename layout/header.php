@@ -22,6 +22,7 @@
             </ul>
             <ul>
                 <li><a href="#">Connection</a></li>
+                <li><a href="register.php">Register</a></li>
             </ul>
         </nav>
     </div>
