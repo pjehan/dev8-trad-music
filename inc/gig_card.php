@@ -7,5 +7,7 @@
     <time datetime="<?= $date_start->format('Y-m-d h:i') ?>">
         <?= $date_start->format('l jS \o\f F \a\t g:i a') ?>
     </time>
-    <a href="#" class="btn btn-primary">See more</a>
+    <a href="gig.php?id=<?= $gig['id'] ?>" class="btn btn-primary">
+      See more
+    </a>
 </article>

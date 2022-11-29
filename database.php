@@ -70,7 +70,10 @@ function findNextGigs(int $limit = 4): array
     global $connection;
 
     $query = "
-        SELECT *
+        SELECT
+            gig.*,
+            pub.name,
+            pub.image
         FROM gig
         INNER JOIN pub ON pub.id = gig.pub_id
         WHERE gig.date_start > NOW()
@@ -81,4 +84,27 @@ function findNextGigs(int $limit = 4): array
     $stmt->execute();
 
     return $stmt->fetchAll();
+}
+
+function findOneGig(int $id): array
+{
+    global $connection;
+
+    $query = "
+        SELECT
+            gig.*,
+            pub.name,
+            pub.image,
+            pub.address,
+            pub.zip_code,
+            pub.city
+        FROM gig
+        INNER JOIN pub ON pub.id = gig.pub_id
+        WHERE gig.id = :id
+    ";
+    $stmt = $connection->prepare($query);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+
+    return $stmt->fetch();
 }
