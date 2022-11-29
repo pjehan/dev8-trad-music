@@ -108,3 +108,21 @@ function findOneGig(int $id): array
 
     return $stmt->fetch();
 }
+
+function insertMusician(string $first_name, string $last_name, ?string $image, string $email, string $password): bool
+{
+    global $connection;
+
+    $query = "
+        INSERT INTO musician (first_name, last_name, image, email, password)
+        VALUES (:first_name, :last_name, :image, :email, :password);
+    ";
+    $stmt = $connection->prepare($query);
+    $stmt->bindValue(':first_name', $first_name);
+    $stmt->bindValue(':last_name', $last_name);
+    $stmt->bindValue(':image', $image);
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':password', $password);
+
+    return $stmt->execute();
+}
