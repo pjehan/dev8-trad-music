@@ -9,10 +9,16 @@ if(isset($_POST['first_name']) && isset($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $is_inserted = insertMusician($first_name, $last_name, null, $email, $password);
+    $image = null;
+    if (isset($_FILES['image'])) {
+        $image = $_FILES['image']['name'];
+        move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/' . $image);
+    }
+
+    $is_inserted = insertMusician($first_name, $last_name, $image, $email, $password);
 
     if ($is_inserted) {
-      header('Location: index.php'); // Redirection vers l'accueil
+        header('Location: index.php'); // Redirection vers l'accueil
     }
 }
 
@@ -23,7 +29,7 @@ getHeader('Register');
 
     <h1>Register</h1>
 
-    <form action="register.php" method="post">
+    <form action="register.php" method="post" enctype="multipart/form-data">
         <div>
             <label for="first_name">First name</label>
             <input type="text" id="first_name" name="first_name" placeholder="First name" required>
@@ -34,7 +40,7 @@ getHeader('Register');
         </div>
         <div>
             <label for="image">Image</label>
-            <input type="file" id="image" name="image">
+            <input type="file" id="image" name="image" accept="image/*">
         </div>
         <div>
             <label for="email">Email</label>
