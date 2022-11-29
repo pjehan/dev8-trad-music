@@ -2,7 +2,7 @@
 require_once "functions.php";
 require_once "database.php";
 
-$gigs = getAllGigs();
+$gigs = findNextGigs();
 $musicians = findAll('musician', [], ['first_name' => 'ASC', 'last_name' => 'ASC']);
 // SELECT * FROM musician ORDER BY first_name ASC, last_name ASC;
 

@@ -1,10 +1,11 @@
+<?php $date_start = new DateTime($gig['date_start']); ?>
 <article class="card">
-    <img src="uploads/<?= $gig['image'] ?>" alt="<?= $gig['pub'] ?>">
+    <img src="uploads/<?= $gig['image'] ?>" alt="<?= $gig['name'] ?>">
     <h3>
-        <?= $gig['pub'] ?>
+        <?= $gig['name'] ?>
     </h3>
-    <time datetime="<?= $gig['date']->format('Y-m-d h:i') ?>">
-        <?= $gig['date']->format('l jS \o\f F \a\t g:i a') ?>
+    <time datetime="<?= $date_start->format('Y-m-d h:i') ?>">
+        <?= $date_start->format('l jS \o\f F \a\t g:i a') ?>
     </time>
     <a href="#" class="btn btn-primary">See more</a>
 </article>
