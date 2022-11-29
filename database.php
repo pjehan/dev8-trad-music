@@ -126,3 +126,15 @@ function insertMusician(string $first_name, string $last_name, ?string $image, s
 
     return $stmt->execute();
 }
+
+function findOneMusicianEmail(string $email): array|bool
+{
+    global $connection;
+
+    $query = "SELECT * FROM musician WHERE email = :email";
+    $stmt = $connection->prepare($query);
+    $stmt->bindValue(':email', $email);
+    $stmt->execute();
+
+    return $stmt->fetch();
+}
