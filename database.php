@@ -122,7 +122,7 @@ function insertMusician(string $first_name, string $last_name, ?string $image, s
     $stmt->bindValue(':last_name', $last_name);
     $stmt->bindValue(':image', $image);
     $stmt->bindValue(':email', $email);
-    $stmt->bindValue(':password', $password);
+    $stmt->bindValue(':password', password_hash($password, PASSWORD_ARGON2I));
 
     return $stmt->execute();
 }
