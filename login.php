@@ -10,6 +10,8 @@ if (isset($_POST['email'], $_POST['password'])) {
     if ($musician && password_verify($password, $musician['password'])) {
         session_start();
         $_SESSION['id'] = $musician['id'];
+
+        header('Location: index.php');
     } else {
         $error = "Email or password incorrect!";
     }

@@ -138,3 +138,29 @@ function findOneMusicianEmail(string $email): array|bool
 
     return $stmt->fetch();
 }
+
+function getCurrentUser(): array|bool
+{
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['id'])) {
+        return false;
+    }
+
+    $id = $_SESSION['id'];
+
+    if ($id) {
+        global $connection;
+
+        $query = "SELECT * FROM musician WHERE id = :id";
+        $stmt = $connection->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    return false;
+}

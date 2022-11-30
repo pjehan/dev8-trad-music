@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../database.php'; ?>
 </main>
 
 <footer class="site-footer">

@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../database.php';
+
+$user = getCurrentUser();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +26,17 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <ul>
-                <li><a href="login.php">Connection</a></li>
-                <li><a href="register.php">Register</a></li>
+                <?php if ($user): ?>
+                    <li>
+                      <a href="logout.php">
+                        Logout
+                      </a>
+                      (<?= $user['first_name'] . ' ' . $user['last_name'] ?>)
+                    </li>
+                <?php else: ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
